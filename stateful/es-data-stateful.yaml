@@ -48,7 +48,7 @@ spec:
         - name: HTTP_ENABLE
           value: "true"
         - name: ES_JAVA_OPTS
-          value: -Xms256m -Xmx256m
+          value: -Xms2g -Xmx2g
         - name: PROCESSORS
           valueFrom:
             resourceFieldRef:
@@ -57,7 +57,7 @@ spec:
           requests:
             cpu: 0.25
           limits:
-            cpu: 1
+            cpu: 3
         ports:
         - containerPort: 9200
           name: http
@@ -70,7 +70,7 @@ spec:
           periodSeconds: 10
         readinessProbe:
           httpGet:
-            path: /_cluster/health
+            path: /_cluster/health?pretty
             port: http
           initialDelaySeconds: 20
           timeoutSeconds: 5
@@ -85,4 +85,4 @@ spec:
       accessModes: [ ReadWriteOnce ]
       resources:
         requests:
-          storage: 12Gi
+          storage: 50Gi

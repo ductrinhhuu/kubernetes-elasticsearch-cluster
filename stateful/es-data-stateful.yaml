@@ -70,7 +70,7 @@ spec:
           periodSeconds: 10
         readinessProbe:
           httpGet:
-            path: /_cluster/health?pretty
+            path: /_cluster/health
             port: http
           initialDelaySeconds: 20
           timeoutSeconds: 5

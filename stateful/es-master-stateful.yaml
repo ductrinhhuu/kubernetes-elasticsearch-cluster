@@ -11,7 +11,7 @@ spec:
       component: elasticsearch
       role: master
   serviceName: elasticsearch-master
-  replicas: 2
+  replicas: 3
   template:
     metadata:
       labels:

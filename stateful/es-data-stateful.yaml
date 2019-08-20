@@ -11,7 +11,7 @@ spec:
       component: elasticsearch
       role: data
   serviceName: elasticsearch-data
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       labels:
@@ -48,7 +48,7 @@ spec:
         - name: HTTP_ENABLE
           value: "true"
         - name: ES_JAVA_OPTS
-          value: -Xms2g -Xmx2g
+          value: -Xms4g -Xmx4g
         - name: PROCESSORS
           valueFrom:
             resourceFieldRef:
@@ -57,7 +57,7 @@ spec:
           requests:
             cpu: 0.25
           limits:
-            cpu: 3
+            cpu: 2
         ports:
         - containerPort: 9200
           name: http

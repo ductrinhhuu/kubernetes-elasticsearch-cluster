@@ -3,20 +3,7 @@ kind: Namespace
 metadata:
   name: elasticsearch
 ---
-apiVersion: "v1"
-kind: "PersistentVolume"
-metadata:
-  name: "pv01" 
-spec:
-  capacity:
-    storage: "50Gi" 
-  accessModes:
-    - "ReadWriteOnce"
-  gcePersistentDisk: 
-    fsType: "xfs" 
-    pdName: "pd-disk-1" 
----
-apiVersion: storage.k8s.io/v1
+apiVersion: storage.k8s.io/v1beta1
 kind: StorageClass
 metadata:
   name: fast
@@ -109,7 +96,7 @@ spec:
       storageClassName: fast
       resources:
         requests:
-          storage: 10Gi
+          storage: 50Gi
 ---
 apiVersion: v1
 kind: Service
@@ -127,3 +114,4 @@ spec:
   selector:
     component: elasticsearch
     role: data
+

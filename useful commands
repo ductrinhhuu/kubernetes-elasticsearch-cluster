@@ -1,0 +1,38 @@
+# reset kubeadm
+echo "y" | sudo kubeadm reset
+
+
+# remove old config
+sudo rm -r ~/.kube
+
+
+# init kubernetes (use flannel)
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+
+
+# init pod (here I use flannel)
+kubectl apply -f ~/kube-flannel.yml
+
+
+# create service/storage/pods from config file (yaml/yml)
+kubectl create -f <file-name>
+
+
+# delete service/storage/pods by id
+kubectl delete <service-name> <id>
+
+
+# delete service/storage/pods by file
+kubectl delete -f <file-name>
+
+
+# get all running stuff
+kubectl get pv,pvc,pod,service,storageclass
+
+
+# describe detail of service
+kubectl describe <service-name> <id>
+
+############## NOTE #################
+The Kubelet needs to run with the argument --cloud-provider=gce. For this the KUBELET_KUBECONFIG_ARGS in /etc/systemd/system/kubelet.service.d/10-kubeadm.conf have to be edited. The Kubelet can then be restarted with
+sudo systemctl restart kubelet && sudo systemctl daemon-reload

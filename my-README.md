@@ -9,7 +9,7 @@ Let's check if those PV were created successfully and ready for use:
 
 ```shell
 kubectl get svc,deployment,pods
-NNAME                         CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
-persistentvolume/pv-data     100Gi      RWO            Retain           Available           standard                8s
-persistentvolume/pv-master   100Gi      RWO            Retain           Available           standard                11s
+NAME                         CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
+persistentvolume/pv-data     200Gi      RWO            Retain           Available           standard                8s
+persistentvolume/pv-master   10Gi      RWO            Retain           Available           standard                11s
 ```

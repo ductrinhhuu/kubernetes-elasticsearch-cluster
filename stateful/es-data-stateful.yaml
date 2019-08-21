@@ -1,3 +1,16 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: pv-data-0
+spec:
+  capacity:
+    storage: 100Gi
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data/"
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -17,7 +30,7 @@ spec:
       labels:
         component: elasticsearch
         role: data
-    spec:
+    spec:          
       initContainers:
       - name: init-sysctl
         image: busybox:1.27.2
@@ -29,7 +42,7 @@ spec:
           privileged: true
       containers:
       - name: es-data
-        image: quay.io/pires/docker-elasticsearch-kubernetes:6.3.2
+        image: quay.io/pires/docker-elasticsearch-kubernetes:6.2.4
         env:
         - name: NAMESPACE
           valueFrom:
@@ -46,34 +59,19 @@ spec:
         - name: NODE_INGEST
           value: "false"
         - name: HTTP_ENABLE
-          value: "true"
+          value: "false"
         - name: ES_JAVA_OPTS
-          value: -Xms4g -Xmx4g
+          value: -Xms2g -Xmx2g
         - name: PROCESSORS
           valueFrom:
             resourceFieldRef:
               resource: limits.cpu
         resources:
-          requests:
-            cpu: 0.25
           limits:
             cpu: 2
         ports:
-        - containerPort: 9200
-          name: http
         - containerPort: 9300
           name: transport
-        livenessProbe:
-          tcpSocket:
-            port: transport
-          initialDelaySeconds: 20
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /_cluster/health
-            port: http
-          initialDelaySeconds: 20
-          timeoutSeconds: 5
         volumeMounts:
         - name: storage
           mountPath: /data
@@ -85,4 +83,4 @@ spec:
       accessModes: [ ReadWriteOnce ]
       resources:
         requests:
-          storage: 50Gi
+          storage: 100Gi

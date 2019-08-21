@@ -2,13 +2,15 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: pv-master
+  name: pv-master-2
 spec:
   capacity:
-    storage: 10Gi
+    storage: 5Gi
   storageClassName: standard
   accessModes:
-    - ReadWriteOnce  
-  gcePersistentDisk:
-    pdName: models-master
-    fsType: xfs
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data/"
+  # gcePersistentDisk:
+  #   pdName: models-master
+  #   fsType: xfs

@@ -33,6 +33,47 @@ kubectl get pv,pvc,pod,service,storageclass
 # describe detail of service
 kubectl describe <service-name> <id>
 
+
+# see log of a pod of master
+kubectl logs -f pod/<pod-id> | grep ClusterApplierService
+
+
+####### add label to a node
+# get nodes info
+kubectl get nodes
+
+# labeling your nodes
+kubectl label nodes <your-node-name> disktype=ssd
+
+# show nodes info with label
+kubectl get nodes --show-labels
+
+# then specify node selector in config
+...
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  nodeSelector:
+    disktype: ssd
+...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ############## NOTE #################
-The Kubelet needs to run with the argument --cloud-provider=gce. For this the KUBELET_KUBECONFIG_ARGS in /etc/systemd/system/kubelet.service.d/10-kubeadm.conf have to be edited. The Kubelet can then be restarted with
-sudo systemctl restart kubelet && sudo systemctl daemon-reload
+Create Persistent Volume for each of nodes running
+e.g: If Elasticsearch has 3 master nodes and 1 data node -> create 4 Persistent Volume

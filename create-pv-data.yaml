@@ -2,13 +2,15 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: pv-data
+  name: pv-data-0
 spec:
   capacity:
     storage: 200Gi
   storageClassName: standard
   accessModes:
-    - ReadWriteOnce  
-  gcePersistentDisk:
-    pdName: models-data
-    fsType: xfs
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data/"
+  # gcePersistentDisk:
+  #   pdName: models-data
+  #   fsType: xfs

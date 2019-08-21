@@ -1,8 +1,12 @@
 ## For new environment setup
-[Kubernetes initial setup](https://vitux.com/install-and-deploy-kubernetes-on-ubuntu/)
+Install dependencies for Kubernetes [here](https://vitux.com/install-and-deploy-kubernetes-on-ubuntu/)
 
 ### Set memlock to unlimited and max open file
-Open file `/etc/systemd/system.conf`, uncomment 2 fields `DefaultLimitNOFILE` and `DefaultLimitMEMLOCK`
+Open file `/etc/systemd/system.conf`, uncomment 2 fields:
+```shell
+DefaultLimitNOFILE=<your-value>
+DefaultLimitMEMLOCK=<your-value>
+```
 
 Open file `/etc/security/limits.conf`, add those lines to the end of file:
 

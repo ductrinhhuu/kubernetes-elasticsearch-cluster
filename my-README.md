@@ -1,6 +1,14 @@
 ## For new environment setup
 Install dependencies for Kubernetes [here](https://vitux.com/install-and-deploy-kubernetes-on-ubuntu/)
 
+### Create directory .kube
+```shell
+mkdir -p ~/.kube
+```
+
+### Turn off swap on reboot
+Open `/etc/fstab` and comment the line starting with `swap`
+
 ### Set memlock to unlimited and max open file
 Open file `/etc/systemd/system.conf`, uncomment 2 fields:
 ```shell

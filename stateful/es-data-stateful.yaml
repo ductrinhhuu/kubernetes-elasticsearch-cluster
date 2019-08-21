@@ -30,7 +30,21 @@ spec:
       labels:
         component: elasticsearch
         role: data
-    spec:          
+    spec:
+      nodeSelector:
+        w4: data0
+      # affinity:
+      #   podAntiAffinity:
+      #     preferredDuringSchedulingIgnoredDuringExecution:
+      #     - weight: 100
+      #       podAffinityTerm:
+      #         labelSelector:
+      #           matchExpressions:
+      #           - key: role
+      #             operator: In
+      #             values:
+      #             - data
+      #         topologyKey: kubernetes.io/hostname
       initContainers:
       - name: init-sysctl
         image: busybox:1.27.2
@@ -68,7 +82,7 @@ spec:
               resource: limits.cpu
         resources:
           limits:
-            cpu: 2
+            cpu: 1
         ports:
         - containerPort: 9300
           name: transport

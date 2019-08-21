@@ -1,3 +1,16 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: pv-ingest-0
+spec:
+  capacity:
+    storage: 5Gi
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data/"
+---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -14,19 +27,7 @@ spec:
         role: ingest
     spec:
       nodeSelector:
-        w5: client0
-      # affinity:
-      #   podAntiAffinity:
-      #     preferredDuringSchedulingIgnoredDuringExecution:
-      #     - weight: 100
-      #       podAffinityTerm:
-      #         labelSelector:
-      #           matchExpressions:
-      #           - key: role
-      #             operator: In
-      #             values:
-      #             - ingest
-      #         topologyKey: kubernetes.io/hostname
+        w5: client0      
       initContainers:
       - name: init-sysctl
         image: busybox:1.27.2
@@ -89,6 +90,6 @@ spec:
         - name: storage
           mountPath: /data
       volumes:
-          - emptyDir:
-              medium: ""
-            name: storage
+        - emptyDir:
+            medium: ""
+          name: storage

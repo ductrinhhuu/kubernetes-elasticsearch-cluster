@@ -1,0 +1,27 @@
+# Create persistent volume for stateful use
+# Note the number of data nodes created in Elasticsearch cluster
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: mysql-pv-claim
+spec:
+  capacity:
+    storage: 50Gi
+  storageClassName: fast
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data/"
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: wp-pv-claim
+spec:
+  capacity:
+    storage: 50Gi
+  storageClassName: fast
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data/"

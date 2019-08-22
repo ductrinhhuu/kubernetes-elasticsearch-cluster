@@ -1,0 +1,27 @@
+# Create persistent volume for stateful use
+# Note the number of data nodes created in Elasticsearch cluster
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: pv-data-0
+spec:
+  capacity:
+    storage: 50Gi
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data/"
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: pv-data-1
+spec:
+  capacity:
+    storage: 50Gi
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data/"

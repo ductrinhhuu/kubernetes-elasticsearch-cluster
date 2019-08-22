@@ -1,0 +1,6 @@
+resources:
+  # - pv-wordpress.yaml
+  - pv-data.yml
+  - es-master.yml
+  - es-data.yml
+  - es-client.yml

@@ -1,0 +1,1 @@
+### Should follow instruction [here](https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/#before-you-begin)
